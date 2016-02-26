@@ -6,7 +6,7 @@ $.ajax({
   var status      = response['status'];
   var production  = status['Production'];
   var development = status['Development'];
-  if (production !== 'green' && development === 'green') {
+  if (production === 'green' && development === 'green') {
     // status is good
   }
   else {
@@ -17,11 +17,3 @@ $.ajax({
 .fail(function(_) {
   chrome.runtime.sendMessage({statusUnknown: true});
 });
-
-chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
-    if( request.message === "foo" ) {
-      chrome.runtime.sendMessage({"message": "open_new_tab", "url": 'foo'});
-    }
-  }
-);
