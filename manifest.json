@@ -19,5 +19,8 @@
   },
   "background": {
     "scripts": ["background.js"]
-  }
+  },
+  "permissions": [
+    "https://status.heroku.com/api/v3/current-status"
+  ]
 }

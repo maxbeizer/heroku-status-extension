@@ -7,11 +7,16 @@ chrome.browserAction.onClicked.addListener(function(tab) {
   });
 });
 
-// This block is new!
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    if( request.message === "open_new_tab" ) {
-      chrome.tabs.create({"url": request.url});
+    if( request.message === "status_bad" ) {
+      // chrome.tabs.create({"url": request.url});
+      // console.log(request.url);
+      console.log('fooooooooooooooooo');
+      chrome.browserAction.setBadgeBackgroundColor({color:[0, 200, 0, 100]});
+    }
+    else {
+      console.log('baaaaaaaaaaaaaar');
     }
   }
 );
