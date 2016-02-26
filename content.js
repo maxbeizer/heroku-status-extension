@@ -11,17 +11,16 @@ $.ajax({
   }
   else {
     // status is bad
-    // console.log('bad');
-    // chrome.browserAction.setBadgeBackgroundColor({color:[0, 200, 0, 100]});
-    chrome.runtime.sendMessage({"message": "status_bad"});
+    chrome.runtime.sendMessage({statusBad: true});
   }
 })
-.fail(function(response) {
+.fail(function(_) {
+  chrome.runtime.sendMessage({statusUnknown: true});
 });
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    if( request.message === "clicked_browser_action" ) {
+    if( request.message === "foo" ) {
       chrome.runtime.sendMessage({"message": "open_new_tab", "url": 'foo'});
     }
   }

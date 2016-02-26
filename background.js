@@ -9,14 +9,15 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    if( request.message === "status_bad" ) {
-      // chrome.tabs.create({"url": request.url});
-      // console.log(request.url);
-      console.log('fooooooooooooooooo');
-      chrome.browserAction.setBadgeBackgroundColor({color:[0, 200, 0, 100]});
+    if (request.statusBad) {
+      chrome.browserAction.setBadgeText({text: "!"});
+      sendResponse("Got your message.");
+    }
+    else if (request.statusUnknown) {
+      chrome.browserAction.setBadgeText({text: "?"});
     }
     else {
-      console.log('baaaaaaaaaaaaaar');
+      console.log('unhandled message');
     }
   }
 );
